@@ -45,6 +45,18 @@ class CourseController {
             .catch(next)
     }
 
+    forcedelete(req, res, next){
+        Course.deleteOne({_id: req.params.id} )
+            .then(() => res.redirect(`back`))
+            .catch(next)
+    }
+
+    restore(req, res, next){
+        Course.restore({_id: req.params.id},  Course.deleted = false)
+            .then(() => res.redirect(`back`))
+            .catch(next)
+    }
+
 }
 
 module.exports = new CourseController
